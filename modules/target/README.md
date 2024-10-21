@@ -18,7 +18,7 @@ resource "aws_glue_catalog_database" "s3_access_logs_primary" {
 }
 
 module "s3_server_access_logs_lake_primary" {
-  source = "fivexl/terraform-aws-s3-server-access-logs-lake/aws//modules/target"
+  source = "fivexl/s3-server-access-logs-lake/aws//modules/target"
 
   glue_database_name         = aws_glue_catalog_database.s3_access_logs_primary.name
   tags                       = module.tags.result
@@ -32,7 +32,7 @@ resource "aws_glue_catalog_database" "s3_access_logs_secondary" {
 }
 
 module "s3_server_access_logs_lake_secondary" {
-  source = "fivexl/terraform-aws-s3-server-access-logs-lake/aws//modules/target"
+  source = "fivexl/s3-server-access-logs-lake/aws//modules/target"
 
   glue_database_name = aws_glue_catalog_database.s3_access_logs_secondary.name
   tags               = module.tags.result

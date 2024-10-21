@@ -12,7 +12,7 @@ Use this module if you need to replicate logs from other accounts in the organiz
 
 ```hcl
 module "s3_server_access_logs_lake_delivery_configuration_primary" {
-  source = "fivexl/terraform-aws-s3-server-access-logs-lake/aws//modules/delivery_configuration"
+  source = "fivexl/s3-server-access-logs-lake/aws//modules/delivery_configuration"
 
   source_bucket_arn      = "arn:aws:s3:::<bucket_name>"
   destination_account_id = module.s3_access_logs_replication_configuration_primary.account_id
@@ -33,7 +33,7 @@ module "account_baseline_region_level_primary" {
   providers = { aws = aws.primary }
 }
 module "s3_server_access_logs_lake_delivery_configuration_secondary" {
-  source = "fivexl/terraform-aws-s3-server-access-logs-lake/aws//modules/delivery_configuration"
+  source = "fivexl/s3-server-access-logs-lake/aws//modules/delivery_configuration"
 
   source_bucket_arn      = "arn:aws:s3:::<bucket_name>"
   destination_account_id = module.s3_access_logs_replication_configuration_secondary.account_id
