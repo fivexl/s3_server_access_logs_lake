@@ -15,4 +15,6 @@ locals {
   // Truncate to ensure it's 63 characters or fewer
   bucket_name                           = length(local.full_bucket_name) > 63 ? substr(local.full_bucket_name, 0, 63) : local.full_bucket_name
   target_bucket_access_logs_bucket_name = length(local.full_target_bucket_access_logs_bucket_name) > 63 ? substr(local.full_target_bucket_access_logs_bucket_name, 0, 63) : local.full_target_bucket_access_logs_bucket_name
+
+  target_bucket_name = var.target_bucket_name != null ? var.target_bucket_name : local.bucket_name
 }

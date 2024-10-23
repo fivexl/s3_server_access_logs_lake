@@ -1,7 +1,7 @@
 module "target_bucket" {
   source      = "fivexl/account-baseline/aws//modules/s3_baseline"
   version     = "1.3.7"
-  bucket_name = var.target_bucket_name != null ? var.target_bucket_name : local.bucket_name
+  bucket_name = local.target_bucket_name
 
   logging = {
     target_bucket = module.target_bucket_access_logs_bucket.access_logs_bucket_name
@@ -23,7 +23,7 @@ module "target_bucket" {
             }
           }
           "Action" : ["s3:List*", "s3:GetBucketVersioning", "s3:PutBucketVersioning"],
-          "Resource" : "arn:aws:s3:::${local.bucket_name}"
+          "Resource" : "arn:aws:s3:::${local.target_bucket_name}"
         },
         {
           "Sid" : "MemberAccountAccessObjectLevel",
@@ -43,7 +43,7 @@ module "target_bucket" {
           # [source](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html#server-access-logging-overview)
           # https://aws.amazon.com/blogs/security/writing-iam-policies-grant-access-to-user-specific-folders-in-an-amazon-s3-bucket/
           # [DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]
-          "Resource" : "arn:aws:s3:::${local.bucket_name}/$${aws:PrincipalAccount}/*",
+          "Resource" : "arn:aws:s3:::${local.target_bucket_name}/$${aws:PrincipalAccount}/*",
         },
       ]
     }
