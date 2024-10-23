@@ -4,7 +4,7 @@ module "target_bucket" {
   bucket_name = local.target_bucket_name
 
   logging = {
-    target_bucket = var.target_bucket_access_logs_bucket_name != null ? var.var.target_bucket_access_logs_bucket_name : try(module.target_bucket_access_logs_bucket[0].access_logs_bucket_name, null)
+    target_bucket = var.target_bucket_access_logs_bucket_name != null ? var.target_bucket_access_logs_bucket_name : try(module.target_bucket_access_logs_bucket[0].access_logs_bucket_name, null)
   }
 
   policy = jsonencode(
