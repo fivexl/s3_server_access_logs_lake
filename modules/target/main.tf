@@ -64,7 +64,7 @@ module "target_bucket_access_logs_bucket" {
 
 module "glue_table" {
   source  = "fivexl/s3-access-logs-athena-table/aws"
-  version = "1.0.1"
+  version = "1.0.2"
 
   name          = local.glue_table_name
   database_name = var.glue_database_name
