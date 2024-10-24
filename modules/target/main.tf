@@ -39,11 +39,7 @@ module "target_bucket" {
               "aws:PrincipalOrgID" : data.aws_organizations_organization.this.id,
             }
           },
-          # Date-based partitioning log file key format:
-          # [source](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html#server-access-logging-overview)
-          # https://aws.amazon.com/blogs/security/writing-iam-policies-grant-access-to-user-specific-folders-in-an-amazon-s3-bucket/
-          # [DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]
-          "Resource" : "arn:aws:s3:::${local.target_bucket_name}/$${aws:PrincipalAccount}/*",
+          "Resource" : "arn:aws:s3:::${local.target_bucket_name}/*",
         },
       ]
     }
